@@ -290,8 +290,15 @@ Here are few rules:
 - You cannot use automatic variable selection.
 - You need to explain why you added each variable.
 
+```{r}
+p=ggplot(ames_raw_2008)+geom_point()+aes(x=`Gr Liv Area`,y=SalePrice)+xlab("Above grade (ground) living area square feet")+ylab("Sale Price")+geom_smooth(method="lm",se=FALSE)+scale_y_log10()+scale_x_log10()
+p3 <- ggMarginal(p, margins = 'both', fill="skyblue", size=4,type="histogram")
+p3
+```
+
 ```{r,eval=FALSE,echo=show_code}
-lmfit_2008<- # ["your model here"] # use ames_raw_2008
+lmfit_2008<-lm(log(SalePrice)~log(`Gr Liv Area`),ames_raw_2008)
+summary(lmfit_2008)
 ```
 
 When you decide on your model use the following to come up with your test loss.
